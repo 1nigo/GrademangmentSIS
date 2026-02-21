@@ -56,6 +56,8 @@
             
             grades.Add($"Subject: {subject}, Final Grade: {finalGrade}");
 
+            Console.WriteLine($"Subject: {subject}, Final Grade: {finalGrade}");
+
         }
 
 
