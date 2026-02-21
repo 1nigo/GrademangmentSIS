@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Baseleres-BSIT-2-1-\**" />
+    <Compile Remove="Basleres-BSIT-2-1-GradesMngment\**" />
+    <EmbeddedResource Remove="Baseleres-BSIT-2-1-\**" />
+    <EmbeddedResource Remove="Basleres-BSIT-2-1-GradesMngment\**" />
+    <None Remove="Baseleres-BSIT-2-1-\**" />
+    <None Remove="Basleres-BSIT-2-1-GradesMngment\**" />
+  </ItemGroup>
+
+</Project>
