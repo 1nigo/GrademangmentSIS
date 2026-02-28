@@ -8,7 +8,7 @@
         static void Main(string[] args)
         {        
 
-            while (true)
+            while (true) //hello
             {
                 Console.WriteLine("----------Grade Management System (PUPSIS)----------");
                 Console.Write("Enter Subject Name: ");
