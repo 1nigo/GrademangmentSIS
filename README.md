@@ -1,2 +1,1 @@
-# GrademangmentSIS
-BASE
+# GrademangmentSIS SEMESTRAL PROJECT FOR ITP
