@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.4.11605.240 stable
+VisualStudioVersion = 18.4.11605.240
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrademangmentSIS", "GrademangmentSIS.csproj", "{0A3481EA-4F09-4D9F-B919-293131F01765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeMngtAppService", "..\GradeMngtAppService\GradeMngtAppService.csproj", "{424A7D54-0AD3-4F02-BF89-ACF2329333C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeMngntModels", "GradeMngntModels\GradeMngntModels.csproj", "{2895AB72-510B-4DC6-B23B-8AF9C754EF7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeMngtDataService", "..\GradeMngtDataService\GradeMngtDataService.csproj", "{3963FB9F-FF2C-4B65-BA75-3C3E6F3BEA2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeMngmtAppService", "GradeMngmtAppSerivice\GradeMngmtAppService.csproj", "{384262AF-FB38-4003-8675-4BC65C7ACFD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeMngmtDataModels", "..\GradeMngmtDataModels\GradeMngmtDataModels.csproj", "{6AD292C0-99E0-4530-AA77-B29DB6BBDE41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradeMngmntDataService", "GraeMngmntDataService\GradeMngmntDataService.csproj", "{01E65476-5D23-4850-8E46-3EF13C6C4E5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +21,18 @@ Global
 		{0A3481EA-4F09-4D9F-B919-293131F01765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A3481EA-4F09-4D9F-B919-293131F01765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A3481EA-4F09-4D9F-B919-293131F01765}.Release|Any CPU.Build.0 = Release|Any CPU
-		{424A7D54-0AD3-4F02-BF89-ACF2329333C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{424A7D54-0AD3-4F02-BF89-ACF2329333C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{424A7D54-0AD3-4F02-BF89-ACF2329333C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{424A7D54-0AD3-4F02-BF89-ACF2329333C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3963FB9F-FF2C-4B65-BA75-3C3E6F3BEA2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3963FB9F-FF2C-4B65-BA75-3C3E6F3BEA2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3963FB9F-FF2C-4B65-BA75-3C3E6F3BEA2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3963FB9F-FF2C-4B65-BA75-3C3E6F3BEA2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6AD292C0-99E0-4530-AA77-B29DB6BBDE41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AD292C0-99E0-4530-AA77-B29DB6BBDE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AD292C0-99E0-4530-AA77-B29DB6BBDE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AD292C0-99E0-4530-AA77-B29DB6BBDE41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2895AB72-510B-4DC6-B23B-8AF9C754EF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2895AB72-510B-4DC6-B23B-8AF9C754EF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2895AB72-510B-4DC6-B23B-8AF9C754EF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2895AB72-510B-4DC6-B23B-8AF9C754EF7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{384262AF-FB38-4003-8675-4BC65C7ACFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{384262AF-FB38-4003-8675-4BC65C7ACFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{384262AF-FB38-4003-8675-4BC65C7ACFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{384262AF-FB38-4003-8675-4BC65C7ACFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E65476-5D23-4850-8E46-3EF13C6C4E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E65476-5D23-4850-8E46-3EF13C6C4E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E65476-5D23-4850-8E46-3EF13C6C4E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E65476-5D23-4850-8E46-3EF13C6C4E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

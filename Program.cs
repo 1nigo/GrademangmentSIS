@@ -1,8 +1,8 @@
 ﻿
 using System.Formats.Asn1;
 using System.Reflection.Metadata;
-using GradeMngmtDataModels;
-using GradeMngtAppService;
+using GradeMngntModels;
+using GradeMngmntDataService;
 
 namespace GrademangmentSIS{
     internal class Program{
