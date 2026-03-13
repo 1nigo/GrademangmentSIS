@@ -1,6 +1,8 @@
 ﻿
 using System.Formats.Asn1;
 using System.Reflection.Metadata;
+using GradeMngmtDataModels;
+using GradeMngtAppService;
 
 namespace GrademangmentSIS{
     internal class Program{
@@ -9,6 +11,9 @@ namespace GrademangmentSIS{
         static int ansUpd, ansRmv;
         static List<string> grades = new List<string>();
         static int grdListSize = grades.Count;
+
+        static grdManagementBl gradeMngtBl = new grdManagementBl();
+
         static void Main(string[] args){
             int iterator = 1;
             Console.WriteLine("Welcome to the PUP grade management system!");
@@ -32,8 +37,9 @@ namespace GrademangmentSIS{
                             Console.Write("Enter Subject Name: ");
                             string subjectName = Console.ReadLine();
                             enterGrades();
-                            double finalGrade = CalculateFinalGrade(exGrade1, exGrade2, projWork, seatwork1, seatwork2, quiz1, quiz2);
-                            logGrade(subjectName, finalGrade);
+                            double finalGrade = gradeMngtBl.CalculateFinalGrade(exGrade1, exGrade2, projWork, seatwork1, seatwork2, quiz1, quiz2);
+                            gradeMngtBl.logGrade(subjectName, finalGrade);
+                            Console.WriteLine("Grade Logged!");
 
                             Console.Write("Calculate another grade? Y/N: ");
                             ans1 = Console.ReadKey().KeyChar;
@@ -46,56 +52,52 @@ namespace GrademangmentSIS{
                         }
                         break;
                     case '2':
-                        foreach (string log in grades)
-                        {
-                            Console.WriteLine($"{iterator}. " + log);
-                            iterator++;
-                        }
+                        //display()
                         break;
                     case '3':
-                        Console.WriteLine("Current logged grades: ");
-                        foreach (string log in grades)
-                        {
-                            Console.WriteLine($"{iterator}. " + log);
-                            iterator++;
-                        }
-                        Console.Write("Enter log to edit: ");
-                        ansUpd = Convert.ToInt32(Console.ReadLine());
+                        //Console.WriteLine("Current logged grades: ");
+                        //foreach (string log in grades)
+                        //{
+                        //    Console.WriteLine($"{iterator}. " + log);
+                        //    iterator++;
+                        //}
+                        //Console.Write("Enter log to edit: ");
+                        //ansUpd = Convert.ToInt32(Console.ReadLine());
 
-                        if (ansUpd <= grdListSize - 1){
+                        //if (ansUpd <= grdListSize - 1){
 
-                        }
+                        //}
 
-                        iterator = 0;
+                        //iterator = 0;
 
                         break;
                     case '4':
-                        while (true) { 
-                        Console.WriteLine("Current logged grades: ");
-                        foreach (string log in grades)
-                        {
-                            Console.WriteLine($"{iterator}. " + log);
-                            iterator++;
-                        }
-                        Console.Write("Enter log to remove: ");
-                        ansRmv = Convert.ToInt32(Console.ReadLine());
+                        //while (true) { 
+                        //Console.WriteLine("Current logged grades: ");
+                        //foreach (string log in grades)
+                        //{
+                        //    Console.WriteLine($"{iterator}. " + log);
+                        //    iterator++;
+                        //}
+                        //Console.Write("Enter log to remove: ");
+                        //ansRmv = Convert.ToInt32(Console.ReadLine());
 
-                            if (ansUpd <= grdListSize - 1){
-                            grades.Remove(grades[ansRmv - 1]);
-                        }
+                        //    if (ansUpd <= grdListSize - 1){
+                        //    grades.Remove(grades[ansRmv - 1]);
+                        //}
 
-                            iterator = 0;
-                        Console.Write("Remove another item? (Y/N): ");
-                            ans3 = Console.ReadKey().KeyChar;
-                            ans3 = Char.ToUpper(ans3);
-                            Console.WriteLine();
-                            if (ans3 != 'Y')
-                            {
-                                break;
-                            }
-                        }
+                        //    iterator = 0;
+                        //Console.Write("Remove another item? (Y/N): ");
+                        //    ans3 = Console.ReadKey().KeyChar;
+                        //    ans3 = Char.ToUpper(ans3);
+                        //    Console.WriteLine();
+                        //    if (ans3 != 'Y')
+                        //    {
+                        //        break;
+                        //    }
+                        //}
 
-                        break;
+                        //break;
                     default:
                         Console.WriteLine("Please enter a valid action: ");
                         break;
@@ -129,22 +131,6 @@ namespace GrademangmentSIS{
             quiz1 = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter Grade for quiz 2: ");
             quiz2 = Convert.ToInt32(Console.ReadLine());
-        }
-
-        static double CalculateFinalGrade(double exGrade1, double exGrade2, double projWork, double seatwork1, double seatwork2, double quiz1, double quiz2)
-        {
-            double finalGrade = (exGrade1 * 0.3) + (exGrade2 * 0.3) + (projWork * 0.2) + (seatwork1 * 0.05) + (seatwork2 * 0.05) + (quiz1 * 0.05) + (quiz2 * 0.05);
-
-            return finalGrade;
-        }
-
-        static void logGrade(string subject, double finalGrade)
-        {
-
-            grades.Add($"Subject: {subject}, Final Grade: {finalGrade}");
-
-            Console.WriteLine($"Subject: {subject}, Final Grade: {finalGrade}");
-
         }
 
 

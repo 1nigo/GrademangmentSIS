@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -14,6 +14,11 @@
     <EmbeddedResource Remove="Basleres-BSIT-2-1-GradesMngment\**" />
     <None Remove="Baseleres-BSIT-2-1-\**" />
     <None Remove="Basleres-BSIT-2-1-GradesMngment\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GradeMngmtDataModels\GradeMngmtDataModels.csproj" />
+    <ProjectReference Include="..\GradeMngtAppService\GradeMngtAppService.csproj" />
   </ItemGroup>
 
 </Project>
