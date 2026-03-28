@@ -1,8 +1,8 @@
-﻿
-using System.Formats.Asn1;
+﻿using System.Formats.Asn1;
 using System.Reflection.Metadata;
 using GradeMngntModels;
 using GradeMngmntDataService;
+using GradeMngmtAppService;
 
 namespace GrademangmentSIS{
     internal class Program{
@@ -22,12 +22,13 @@ namespace GrademangmentSIS{
             
                 Console.WriteLine("Please select your action 1-4: ");
                 Console.WriteLine("1.) Calculate & save grade");
-                Console.WriteLine("2.) Display all grade");
-                Console.WriteLine("3.) Edit logged grade");
-                Console.WriteLine("4.) Delete logged grade");
+                Console.WriteLine("2.) Display all grades");
+                Console.WriteLine("3.) Edit logged grades");
+                Console.WriteLine("4.) Delete logged grades");
                 Console.Write("Action: ");
                 action = Console.ReadKey().KeyChar;
                 Console.WriteLine();
+                Console.ReadLine();
 
                 switch (action){
                
