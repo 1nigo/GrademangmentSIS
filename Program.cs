@@ -53,7 +53,9 @@ namespace GrademangmentSIS{
                         }
                         break;
                     case '2':
-                        //display()
+                            Console.WriteLine("----------Grade Management System (PUPSIS)----------");
+                            Console.Write("Current logged grades: ");
+                                      
                         break;
                     case '3':
                         //Console.WriteLine("Current logged grades: ");

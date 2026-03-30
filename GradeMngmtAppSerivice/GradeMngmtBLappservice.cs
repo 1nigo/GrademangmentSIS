@@ -8,7 +8,7 @@ namespace GradeMngmtAppService
     public class grdManagementBl
     {
         
-        GradeDataService grdManagementDLS = new GradeDataService(new GradeDBData());
+        GradeDataService grdManagementDLS = new GradeDataService(new GradeMngmntJSONdataservice());
         
 
         
