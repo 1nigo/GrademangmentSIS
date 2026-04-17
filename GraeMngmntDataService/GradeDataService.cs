@@ -18,15 +18,26 @@ namespace GradeMngmntDataService
             _gradeMngmntDataService.AddLog(account);
         }
        
-
-        public void Update(DModels account)
+        public List<DModels> GetGradeLogs()
         {
-            _gradeMngmntDataService.Update(account);
+            return _gradeMngmntDataService.GetGradeLogs();
+        }
+
+        public void Update(DModels loggedGrades)
+        {
+            _gradeMngmntDataService.Update(loggedGrades);
         }
 
         public List<DModels> GetAccounts()
         {
             return _gradeMngmntDataService.GetGradeLogs();
         }
+
+        public void DeleteLog(Guid logToDelete)
+        {
+            _gradeMngmntDataService.DeleteLog(logToDelete);
+        }
+
+
     }
 }

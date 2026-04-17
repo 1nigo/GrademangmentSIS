@@ -26,7 +26,7 @@ namespace GradeMngmntDataService
 
             if (gradeLogs.Count <= 0)
             {
-                gradeLogs.Add(new DModels { FinalGrade = 71.82, subject = "Math" });
+                gradeLogs.Add(new DModels { logID = Guid.NewGuid(), studentFullName = "Inigo Rafael", FinalGrade = 71.82, subject = "Math" });
                 
 
                 SaveDataToJsonFile();
@@ -35,28 +35,55 @@ namespace GradeMngmntDataService
 
         private void SaveDataToJsonFile()
         {
-            using (var outputStream = File.OpenWrite(_jsonFileName))
+            try
             {
-                JsonSerializer.Serialize<List<DModels>>(
-                    new Utf8JsonWriter(outputStream, new JsonWriterOptions
-                    { SkipValidation = true, Indented = true })
-                    , gradeLogs);
+                var opt = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    PropertyNameCaseInsensitive = true
+                };
+
+                string jsonString = JsonSerializer.Serialize(gradeLogs, opt);
+                File.WriteAllText(_jsonFileName, jsonString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving to JSON file: {ex.Message}");
             }
         }
 
         private void RetrieveDataFromJsonFile()
         {
-            using (var jsonFileReader = File.OpenText(_jsonFileName))
+            try
             {
-                gradeLogs = JsonSerializer.Deserialize<List<DModels>>
-                    (jsonFileReader.ReadToEnd(), new JsonSerializerOptions
-                    { PropertyNameCaseInsensitive = true })
-                    .ToList();
+                if (File.Exists(_jsonFileName))
+                {
+                    string jsonString = File.ReadAllText(_jsonFileName);
+
+                    if (!string.IsNullOrEmpty(jsonString))
+                    {
+                        gradeLogs = JsonSerializer.Deserialize<List<DModels>>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<DModels>();
+                    }
+                    else
+                    {
+                        gradeLogs = new List<DModels>();
+                    }
+                }
+                else
+                {
+                    gradeLogs = new List<DModels>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading from JSON file: {ex.Message}");
+                gradeLogs = new List<DModels>();
             }
         }
 
         public void AddLog(DModels account)
         {
+            RetrieveDataFromJsonFile();
             gradeLogs.Add(account);
             SaveDataToJsonFile();
         }
@@ -67,33 +94,43 @@ namespace GradeMngmntDataService
             return gradeLogs;
         }
 
-        //public DModels? GetById(Guid id)
-        //{
-        //    RetrieveDataFromJsonFile();
-        //    return gradeLogs.Where(x => x.AccountId == id).FirstOrDefault();
-        //}
-
-        //public DModels? GetByUsername(string username)
-        //{
-        //    RetrieveDataFromJsonFile();
-        //    return gradeLogs.Where(x => x.Username == username).FirstOrDefault();
-        //}
-
-        public void Update(DModels account)
+        public void Update(DModels loggedGrades)
         {
             RetrieveDataFromJsonFile();
 
-            //var existingAccount = gradeLogs.FirstOrDefault(x => x.AccountId == account.AccountId);
+            var currentgradeLogs = gradeLogs.FirstOrDefault(x => x.logID == loggedGrades.logID);
 
-            //if (existingAccount != null)
-            //{
-            //    existingAccount.Username = account.Username;
-            //    existingAccount.Password = account.Password;
-            //}
+            if (currentgradeLogs != null)
+            {
+                currentgradeLogs.studentFullName = loggedGrades.studentFullName;
+                currentgradeLogs.subject = loggedGrades.subject;
+                currentgradeLogs.FinalGrade = loggedGrades.FinalGrade;
 
-            SaveDataToJsonFile();
+                SaveDataToJsonFile();
+            }
+            else
+            {
+                Console.WriteLine($"Log with ID {loggedGrades.logID} not found for update.");
+            }
         }
 
-        
+        public DModels? GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+
+        public void DeleteLog(Guid logToDelete)
+        {
+            RetrieveDataFromJsonFile();
+
+            var target = gradeLogs.FirstOrDefault(x => x.logID == logToDelete);
+            if (target != null)
+            {
+                gradeLogs.Remove(target);
+                SaveDataToJsonFile();
+            }
+        }
     }
 }

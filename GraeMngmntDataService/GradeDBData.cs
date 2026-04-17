@@ -26,7 +26,7 @@ namespace GradeMngmntDataService
 
             if (existing.Count == 0)
             {
-                DModels BaseLog = new DModels { subject = "AP", FinalGrade = 25.45};
+                DModels BaseLog = new DModels { logID = Guid.NewGuid(), subject = "AP", FinalGrade = 25.45, studentFullName = "John Doe" };
                 
 
                 AddLog(BaseLog);
@@ -36,12 +36,14 @@ namespace GradeMngmntDataService
 
         public void AddLog(DModels gradeLogs)
         {
-            var insertStatement = "INSERT INTO TB_BaseTable VALUES (@FinalGrade, @subject)";
+            var insertStatement = "INSERT INTO TB_BaseTable (LogID, FinalGrade, subject, studentFullname) VALUES (@LogID, @FinalGrade, @subject, @studentFullname)";
 
             SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
+            insertCommand.Parameters.AddWithValue("@LogID", gradeLogs.logID);
             insertCommand.Parameters.AddWithValue("@FinalGrade", gradeLogs.FinalGrade);
             insertCommand.Parameters.AddWithValue("@subject", gradeLogs.subject);
+            insertCommand.Parameters.AddWithValue("@studentFullname", gradeLogs.studentFullName);
             sqlConnection.Open();
 
             insertCommand.ExecuteNonQuery();
@@ -52,7 +54,7 @@ namespace GradeMngmntDataService
 
         public List<DModels> GetGradeLogs()
         {
-            string selectStatement = "SELECT FinalGrade, subject FROM TB_BaseTable";
+            string selectStatement = "SELECT FinalGrade, subject, studentFullname, LogID FROM TB_BaseTable";
 
             SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
 
@@ -64,10 +66,11 @@ namespace GradeMngmntDataService
 
             while (reader.Read())
             {
-                //deserialize
 
                 DModels grdLog = new DModels();
+                grdLog.logID = Guid.Parse(reader["LogID"].ToString());
                 grdLog.FinalGrade = Convert.ToDouble(reader["FinalGrade"]);
+                grdLog.studentFullName = reader["studentFullname"].ToString();
                 grdLog.subject = reader["subject"].ToString();
 
 
@@ -78,33 +81,75 @@ namespace GradeMngmntDataService
             return gradeLogs;
         }
 
-       
-
-       
-
-        public void Update(DModels Glogs)
+        public void DeleteLog(Guid logToDelete)
         {
-            
+            try
+            {
+                string delStatement = "DELETE FROM TB_BaseTable WHERE LogID = @LogID";
+
+                using (SqlCommand deleteCommand = new SqlCommand(delStatement, sqlConnection))
+                {
+                    deleteCommand.Parameters.AddWithValue("@LogID", logToDelete);
+
+                    sqlConnection.Open();
+                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine($"Successfully deleted record with ID: {logToDelete}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No record found with ID: {logToDelete}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting log: {ex.Message}");
+                if (sqlConnection.State == System.Data.ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
         }
 
-        
+        public void Update(DModels account)
+        {
+            try
+            {
+                var updateStatement = "UPDATE TB_BaseTable SET FinalGrade = @FinalGrade, subject = @subject, studentFullname = @studentFullname WHERE LogID = @LogID";
 
+                SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
 
-        //public void Update(DModels account)
-        //{
-        //    sqlConnection.Open();
+                updateCommand.Parameters.AddWithValue("@LogID", account.logID);
+                updateCommand.Parameters.AddWithValue("@FinalGrade", account.FinalGrade);
+                updateCommand.Parameters.AddWithValue("@subject", account.subject);
+                updateCommand.Parameters.AddWithValue("@studentFullname", account.studentFullName);
 
-        //    var updateStatement = $"UPDATE TB_BaseTable SET FinalGrade = @FinalGrade, subject = @subject WHERE AccountId = @AccountId";
+                sqlConnection.Open();
+                int rowsAffected = updateCommand.ExecuteNonQuery();
+                sqlConnection.Close();
 
-        //    SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
-
-        //    updateCommand.Parameters.AddWithValue("@Username", account.Username);
-        //    updateCommand.Parameters.AddWithValue("@Password", account.Password);
-        //    updateCommand.Parameters.AddWithValue("@AccountId", account.AccountId);
-        //    updateCommand.ExecuteNonQuery();
-
-        //    sqlConnection.Close();
-        //}
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine($"Successfully updated record with ID: {account.logID}");
+                }
+                else
+                {
+                    Console.WriteLine($"No record found with ID: {account.logID}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating record: {ex.Message}");
+                if (sqlConnection.State == System.Data.ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
 
 
     }
