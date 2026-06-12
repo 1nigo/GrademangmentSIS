@@ -10,7 +10,7 @@ namespace GradeMngmtAppService
     {
         public double weightWritten, weightProject, weightExam;
 
-        GradeDataService grdManagementDLS = new GradeDataService(new GradeDBData());
+        GradeDataService grdManagementDLS = new GradeDataService(new GradeMngmntJSONdataservice());
 
         public void grdWeights(double weightWritten, double weightProject, double weightExam)
         {

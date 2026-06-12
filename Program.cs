@@ -209,6 +209,9 @@ namespace GrademangmentSIS
                 newGrade = Convert.ToDouble(Console.ReadLine());
 
                 gradeMngtBl.updateLog(loggedID, newName, newSubject, newGrade);
+            } else
+            {
+                Console.WriteLine("Please enter a valid index");
             }
         }
 
@@ -238,6 +241,10 @@ namespace GrademangmentSIS
                     gradeMngtBl.deleteLog(logToDelete.logID);
                     Console.WriteLine("Log deleted.");
                 }
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid index");
             }
         }
 
