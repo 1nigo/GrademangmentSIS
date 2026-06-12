@@ -151,6 +151,26 @@ namespace GradeMngmntDataService
             }
         }
 
+        public DModels? GetLogByID(Guid logID)
+        {
+            var selectStatement = "SELECT LogID, FinalGrade, studentFullname, subject FROM TB_BaseTable WHERE LogID = @LogID";
+            SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
+            selectCommand.Parameters.AddWithValue("@LogID", logID.ToString());
+            sqlConnection.Open();
+            SqlDataReader reader = selectCommand.ExecuteReader();
 
+            var gradeLog = new DModels();
+
+            while (reader.Read())
+            {
+                gradeLog.logID = Guid.Parse(reader["LogID"].ToString());
+                gradeLog.FinalGrade = Convert.ToDouble(reader["FinalGrade"]);
+                gradeLog.studentFullName = reader["studentFullname"].ToString();
+                gradeLog.subject = reader["subject"].ToString();
+            }
+
+            sqlConnection.Close();
+            return gradeLog;
+        }
     }
 }

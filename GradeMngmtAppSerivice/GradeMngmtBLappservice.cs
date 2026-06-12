@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿using GradeMngmntDataService;
 using GradeMngntModels;
-using GradeMngmntDataService;
+using System.Reflection;
+using System.Security.Principal;
 
 namespace GradeMngmtAppService
 {
@@ -27,6 +28,13 @@ namespace GradeMngmtAppService
             return finalGrade;
         }
 
+        public void CalculateAndLogGrade(string studentName, string subject, double weightWritten, double weightProject, double weightExam, double exGrade1, double projWork, double seatwork1, double seatwork2, double assignment1, double assignment2, double quiz1, double quiz2)
+        {
+            grdWeights(weightWritten, weightProject, weightExam);
+            double finalGrade = CalculateFinalGrade(exGrade1, projWork, seatwork1, seatwork2, assignment1, assignment2, quiz1, quiz2);
+            logGrade(studentName, subject, finalGrade);
+        }
+
         public void logGrade(string studentName, string subject, double finalGrade)
         {
 
@@ -40,6 +48,8 @@ namespace GradeMngmtAppService
 
             grdManagementDLS.Addlog(mdl);
         }
+
+        
 
         public void updateLog(Guid logID, string studentName, string subject, double finalGrade)
         {
@@ -64,6 +74,11 @@ namespace GradeMngmtAppService
         public void deleteLog(Guid logID)
         {
             grdManagementDLS.DeleteLog(logID);
+        }
+
+        public DModels? GetLogByID(Guid logID)
+        {
+            return grdManagementDLS.GetLogByID(logID);
         }
     }
 }

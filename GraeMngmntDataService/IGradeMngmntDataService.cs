@@ -10,7 +10,7 @@ namespace GradeMngmntDataService
 
         public void AddLog(DModels account);
         public List<DModels> GetGradeLogs();
-
+        DModels? GetLogByID(Guid logID);
 
         public void DeleteLog(Guid logToDelete);
 

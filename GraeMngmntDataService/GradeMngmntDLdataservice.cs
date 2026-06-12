@@ -38,6 +38,11 @@ namespace GradeMngntDataService
             return gradeList;
         }
 
+        public DModels? GetLogByID(Guid logID)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Guid logGID, string studentName, string subject, double finalGrade)
         {
             var currentgradeLogs = gradeList.FirstOrDefault(x => x.logID == logGID);

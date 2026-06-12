@@ -132,5 +132,10 @@ namespace GradeMngmntDataService
                 SaveDataToJsonFile();
             }
         }
+
+        public DModels? GetLogByID(Guid logID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

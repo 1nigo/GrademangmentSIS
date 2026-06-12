@@ -28,6 +28,11 @@ namespace GradeMngmntDataService
             _gradeMngmntDataService.Update(loggedGrades);
         }
 
+        public DModels? GetLogByID(Guid id)
+        {
+            return _gradeMngmntDataService.GetLogByID(id);
+        }
+
         public List<DModels> GetAccounts()
         {
             return _gradeMngmntDataService.GetGradeLogs();
